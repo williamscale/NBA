@@ -3,7 +3,7 @@ import pandas as pd
 import year_range_func
 import matplotlib.pyplot as plt
 
-start_year = 2015
+start_year = 2018
 end_year = 2019
 record = '4-0'
 

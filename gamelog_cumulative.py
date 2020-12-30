@@ -6,22 +6,12 @@ from nba_api.stats.endpoints import leaguegamelog
 import list_func
 import time
 
-def create_recordCum_df(year):
+def create_gamelogCum_df(year, column_cum):
 
 	log_raw = leaguegamelog.LeagueGameLog(
 		player_or_team_abbreviation='T',
 		season = year,
 		sorter = 'DATE',
-		#timeout = 30,
-		#headers = {'Host': 'stats.nba.com',
-		#'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
-		#'Accept': 'application/json, text/plain, */*',
-    	#'Accept-Language': 'en-US,en;q=0.5',
-    	#'Referer': 'https://stats.nba.com/',
-    	#'Accept-Encoding': 'gzip, deflate, br',
-    	#'Connection': 'keep-alive',}
-		#date_to_nullable = '2017-12-01',
-		#date_from_nullable = '2017-12-01',
 		)
 
 	time.sleep(3)
@@ -33,87 +23,70 @@ def create_recordCum_df(year):
 	log = pd.DataFrame(rows)
 	log.columns = headers
 
-	log_nodup = log.drop_duplicates(subset = 'GAME_ID')
-
 	log['WIN'] = (log['WL'] == 'W') * 1
 	log['LOSS'] = (log['WL'] == 'L') * 1
+
+
 	log['Cumulative Wins'] = log.groupby('TEAM_ABBREVIATION').WIN.cumsum()
 	log['Cumulative Losses'] = log.groupby('TEAM_ABBREVIATION').LOSS.cumsum()
 	log['Record'] = log['Cumulative Wins'].astype(str) + '-' + log['Cumulative Losses'].astype(str)
 
-	record_team = log[['SEASON_ID', 'TEAM_ID', 'TEAM_ABBREVIATION', 'TEAM_NAME', 'GAME_ID', 'GAME_DATE', 'WL', 'Record']].copy()
+	log['Cumulative Point Differential'] = log.groupby('TEAM_ABBREVIATION').PLUS_MINUS.cumsum()
 
-	teams = record_team['TEAM_ABBREVIATION'].unique().tolist()
-	dates = record_team['GAME_DATE'].unique()
+	gamelog_cum_team = log[[
+	'SEASON_ID',
+	'TEAM_ID',
+	'TEAM_ABBREVIATION',
+	'TEAM_NAME',
+	'GAME_ID',
+	'GAME_DATE',
+	'WL',
+	'Cumulative Wins',
+	'Record',
+	'Cumulative Point Differential']].copy()
 
-	teams_date = [team + ' DATE' for team in teams] 
-	teams_record = [team for team in teams]
-
-
-	column_names = list_func.alternateList(teams_date, teams_record)
-
-	record_date = pd.DataFrame(columns = teams_record)
-
-	for team in teams:
-
-		record_list = record_team.loc[record_team['TEAM_ABBREVIATION'] == team]['Record'].tolist()
-
-		#date_list = record_team.loc[record_team['TEAM_ABBREVIATION'] == team]['GAME_DATE'].tolist()
-		
-		record_date[team] = record_list
-		#record_date[team + ' DATE'] = date_list
-		#final_record = record_date.iloc[-1]
-		#final_record = final_record[1::2]
-
-	return record_date #, final_record
-
-def create_winsCum_df(year):
-
-	log_raw = leaguegamelog.LeagueGameLog(
-		player_or_team_abbreviation='T',
-		season = year,
-		sorter = 'DATE',
-		#date_to_nullable = '2017-12-01',
-		#date_from_nullable = '2017-12-01',
-		)
-
-	content = json.loads(log_raw.get_json())
-	results = content['resultSets'][0]
-	headers = results['headers']
-	rows = results['rowSet']
-
-	log = pd.DataFrame(rows)
-	log.columns = headers
-
-	log_nodup = log.drop_duplicates(subset = 'GAME_ID')
-
-	log['WIN'] = (log['WL'] == 'W') * 1
-	log['Cumulative Wins'] = log.groupby('TEAM_ABBREVIATION').WIN.cumsum()
-
-	wins_team = log[['SEASON_ID', 'TEAM_ID', 'TEAM_ABBREVIATION', 'TEAM_NAME', 'GAME_ID', 'GAME_DATE', 'WL', 'Cumulative Wins']].copy()
-
-	teams = wins_team['TEAM_ABBREVIATION'].unique().tolist()
-	dates = wins_team['GAME_DATE'].unique()
+	teams = gamelog_cum_team['TEAM_ABBREVIATION'].unique().tolist()
+	dates = gamelog_cum_team['GAME_DATE'].unique()
 
 	teams_date = [team + ' DATE' for team in teams] 
-	teams_wins = [team + ' Cumulative Wins' for team in teams]
+	teams_gamelog_cum = [team for team in teams]
 
-	column_names = list_func.alternateList(teams_date, teams_wins)
+	column_names = list_func.alternateList(teams_date, teams_gamelog_cum)
 
-	wins_date = pd.DataFrame(columns = column_names)
+	gamelog_cum_date = pd.DataFrame(columns = teams_gamelog_cum)
 
-	for team in teams:
+	if column_cum == 'Wins':
 
-		wins_list = wins_team.loc[wins_team['TEAM_ABBREVIATION'] == team]['Cumulative Wins'].tolist()
+		for team in teams:
 
-		date_list = wins_team.loc[wins_team['TEAM_ABBREVIATION'] == team]['GAME_DATE'].tolist()
-		
-		wins_date[team + ' Cumulative Wins'] = wins_list
-		wins_date[team + ' DATE'] = date_list
+			gamelog_cum_list = gamelog_cum_team.loc[gamelog_cum_team['TEAM_ABBREVIATION'] == team]['Cumulative Wins'].tolist()
+			
+			gamelog_cum_date[team] = gamelog_cum_list
 
-	return wins_date
+	elif column_cum == 'Record':
+
+		for team in teams:
+
+			gamelog_cum_list = gamelog_cum_team.loc[gamelog_cum_team['TEAM_ABBREVIATION'] == team]['Record'].tolist()
+			
+			gamelog_cum_date[team] = gamelog_cum_list
+
+	elif column_cum == 'Points Differential':
+
+		for team in teams:
+
+			gamelog_cum_list = gamelog_cum_team.loc[gamelog_cum_team['TEAM_ABBREVIATION'] == team]['Cumulative Point Differential'].tolist()
+			
+			gamelog_cum_date[team] = gamelog_cum_list
+
+	else: 
+
+		print('Improper column input. Input either "Wins", "Record", or "Points Differential" (case-sensitive).')
+
+	return gamelog_cum_date 
 
 if __name__ == '__main__':
 	year = '1999-00'
-	x = create_recordCum_df(year)
+	column_cum = 'Record'
+	x = create_gamelogCum_df(year, column_cum)	
 	print(x)

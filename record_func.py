@@ -3,12 +3,8 @@ import pandas as pd
 
 def create_teamsrecord_df(record_input, year_input):
 
-	# input record to check and year
-	#record_input = '3-0'
-	#year_input = '2015-16'
-
 	# output dataframe
-	recordCum_df = gamelog_cumulative.create_recordCum_df(year_input)
+	recordCum_df = gamelog_cumulative.create_gamelogCum_df(year_input, 'Record')
 
 	# create empty df to populate in loop
 	record_count = pd.DataFrame()
