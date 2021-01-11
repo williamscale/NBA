@@ -13,7 +13,7 @@ def create_teamsrecord_df(record_input, year_input):
 	for team in recordCum_df:
 		
 		# (?<!\S) says that start/end of string must be to right/left of searched term
-		record_01 = recordCum_df[team].str.contains(r'(?<!\S)' + record_input + r'(?!\S)').sum()#.tolist()
+		record_01 = recordCum_df[team].str.contains(r'(?<!\S)' + record_input + r'(?!\S)').sum()
 		record_count.at[0, team] = record_01
 
 	# obtain last row (final record) & transpose
@@ -25,7 +25,7 @@ def create_teamsrecord_df(record_input, year_input):
 	record_count.columns = ['Team', 'Record ' + record_input + '?']
 
 	# combine dataframes and remove duplicate Team column
-	record_count = record_count.join(final_record.set_index('Team'), on='Team')
+	record_count = record_count.join(final_record.set_index('Team'), on = 'Team')
 
 	# get indexes of teams with column that does not match inputted record
 	nomatch_idx = record_count[record_count['Record ' + record_input + '?'] == 0].index
@@ -35,7 +35,9 @@ def create_teamsrecord_df(record_input, year_input):
 	record_count.reset_index(drop = True, inplace = True)
 	record_count.drop('Record ' + record_input + '?', 1, inplace = True)
 
-	record_count['Year'] = pd.Series([year_input for team in range(len(record_count.index))], index = record_count.index)
+	record_count['Year'] = pd.Series([
+		year_input for team in range(len(record_count.index))], 
+		index = record_count.index)
 
 	# substring to be searched 
 	dash = '-'
