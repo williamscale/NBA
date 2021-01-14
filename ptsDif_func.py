@@ -6,8 +6,10 @@ def create_ptsDif_series(ptsDif_input, game_count, year_input, greater_or_lesser
 	# output dataframe
 	ptsDifCum_df = gamelog_cumulative.create_gamelogCum_df(year_input, 'Points Differential')
 
+	# get just gamelog data up to specified number of games
 	ptsDif_gameCount = ptsDifCum_df.iloc[game_count - 1]
 
+	# drop rows in which point differential is not wanted and create new df
 	if greater_or_lesser == 'greater':
 
 		ptsDif_gameCount_cond = ptsDif_gameCount.drop(ptsDif_gameCount[ptsDif_gameCount < ptsDif_input].index)
@@ -22,8 +24,8 @@ def create_ptsDif_series(ptsDif_input, game_count, year_input, greater_or_lesser
 
 	elif greater_or_lesser == 'within':
 
-		not_within_idx = ptsDif_gameCount[(ptsDif_gameCount < ptsDif_input - 1 * game_count) | 
-			(ptsDif_gameCount > ptsDif_input + 1 * game_count)]
+		not_within_idx = ptsDif_gameCount[(ptsDif_gameCount < ptsDif_input - 5) | 
+			(ptsDif_gameCount > ptsDif_input + 5)]
 
 		ptsDif_gameCount_cond = ptsDif_gameCount.drop(not_within_idx.index)
 
@@ -34,8 +36,9 @@ def create_ptsDif_series(ptsDif_input, game_count, year_input, greater_or_lesser
 	return ptsDif_gameCount_cond
 
 if __name__ == '__main__':
-	ptsDif_input = 0
-	game_count = 6
+
+	ptsDif_input = 31
+	game_count = 1
 	year_input = '2015-16'
 	greater_or_lesser = 'within'
 	x = create_ptsDif_series(ptsDif_input, game_count, year_input, greater_or_lesser)
