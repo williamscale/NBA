@@ -1,1 +1,40 @@
-<mxfile host="app.diagrams.net" modified="2021-01-26T20:54:59.859Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" version="14.2.7" etag="UWQEoGcxQnucyf-Q92wu" type="github"><diagram id="hKkp72be-8O1xBxmpUWJ">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-01-26T21:19:30.400Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" etag="ug7oXKrGf-nf-e-yn2K1" version="14.2.7" type="github">
+  <diagram id="hKkp72be-8O1xBxmpUWJ" name="Page-1">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-1" value="list_func.py" style="whiteSpace=wrap;html=1;rounded=0;shadow=1;dashed=0;fontSize=15;strokeColor=#10739e;fillColor=#b1ddf0;glass=0;labelBackgroundColor=none;sketch=0;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="85" width="380" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-2" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="70" y="122.5" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-3" value="" style="html=1;shadow=1;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.calloutArrow;dy=10;dx=20;notch=104;arrowHead=10;rounded=1;glass=0;labelBackgroundColor=#FFFFFF;sketch=0;fillColor=#d5e8d4;fontSize=15;strokeColor=#82b366;" vertex="1" parent="ulBFeObLTbCAvVvDDgiU-2">
+          <mxGeometry x="-10" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-4" value="teams_date" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=15;fontColor=#333333;" vertex="1" parent="ulBFeObLTbCAvVvDDgiU-2">
+          <mxGeometry y="10" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-5" value="teams_record" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=15;fontColor=#333333;" vertex="1" parent="ulBFeObLTbCAvVvDDgiU-2">
+          <mxGeometry y="30" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-6" value="alternateList" style="rounded=0;whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fillColor=#fad9d5;fontSize=15;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;strokeColor=#ae4132;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="230" y="110" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-7" value="Given two lists, creates new list alternating items in input lists" style="text;html=1;strokeColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="240" y="140" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-9" value="" style="endArrow=classic;html=1;fontSize=15;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="152" as="sourcePoint" />
+            <mxPoint x="620" y="152" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ulBFeObLTbCAvVvDDgiU-10" value="output list" style="rounded=0;whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fillColor=#d5e8d4;fontSize=15;align=center;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="620" y="122.5" width="150" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
