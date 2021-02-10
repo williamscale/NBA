@@ -104,12 +104,32 @@ def draw_NBA_court(color, lw, zones_flag, ax = None):
 		linewidth = lw,
 		color = color)
 
-	
+	restricted_rad = 4 * 12
+	restricted_arc = Arc((hoop_center[0] * factor, hoop_center[1] * factor),
+		width = restricted_rad * 2 * factor,
+		height = restricted_rad * 2 * factor, 
+		angle = 0,
+		theta1 = 0, 
+		theta2 = 180)
+
+	restricted_left = plt.vlines(x = (hoop_center[0] - restricted_rad) * factor,
+		ymin = backboard_y * factor,
+		ymax = hoop_center[1] * factor,
+		linewidth = lw,
+		color = color)
+
+	restricted_right = plt.vlines(x = (hoop_center[0] + restricted_rad) * factor,
+		ymin = backboard_y * factor,
+		ymax = hoop_center[1] * factor,
+		linewidth = lw,
+		color = color)
+
+	# need to add vlines on restricted area
 
 	#halfcourt_outer = Arc((0, 422.5), 120, 120, theta1 = 180, theta2 = 0, linewidth = lw, color = color)
 	#halfcourt_inner = Arc((0, 422.5), 40, 40, theta1 = 180, theta2 = 0, linewidth = lw, color = color)
 
-	court_lines = [hoop, paint, freethrow_circle, three_arc]
+	court_lines = [hoop, paint, freethrow_circle, three_arc, restricted_arc]
 
 	for line in court_lines:
 
