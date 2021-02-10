@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2021-01-27T21:19:05.067Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" etag="Gaeb-8rcTsL-8tlAr7yf" version="14.2.7" type="github">
+  <diagram id="WVcZJjX2CZbcTVhkV5Gx" name="Page-1">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-1" value="gamelog_cumulative.py" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=16;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="180" y="80" width="560" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-2" value="year" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="20" y="107.5" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-4" value="create_gamelogCum_df" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=2;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="205" y="110" width="485" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-5" value="leaguegamelog.LeagueGameLog()" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#b0e3e6;strokeColor=#0e8088;fontStyle=2;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="260" y="160" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-3" value="" style="endArrow=classic;html=1;fontSize=16;" edge="1" parent="1" target="-_0JRP_DOwUSVFRvACtR-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="139.5" as="sourcePoint" />
+            <mxPoint x="180" y="139.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-_0JRP_DOwUSVFRvACtR-6" value="Given a season, access NBA.com/Stats for game log data" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="275" y="170" width="250" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

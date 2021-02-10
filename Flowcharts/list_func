@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net" modified="2021-01-27T00:20:54.187Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" etag="CS8aEX4wQdUgkRU_cam_" version="14.2.7" type="github">
+  <diagram id="Nc4ItTD_mHhvuLg7o5hN" name="Page-1">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-1" value="list_func.py" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=16;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" vertex="1">
+          <mxGeometry x="280" y="220" width="290" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-2" value="alternateList" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=2;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="1" vertex="1">
+          <mxGeometry x="305" y="250" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-3" value="Given two lists, creates list alternating items in input lists" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="315" y="260" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-5" value="output list" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="610" y="250" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-6" value="" style="endArrow=classic;html=1;fontSize=16;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="TdhMb0-slUeUXhHMBXfu-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="280" as="sourcePoint" />
+            <mxPoint x="620" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-7" value="teams_date&lt;br&gt;teams_record" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="130" y="250" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="TdhMb0-slUeUXhHMBXfu-8" value="" style="endArrow=classic;html=1;fontSize=16;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="279.5" as="sourcePoint" />
+            <mxPoint x="280" y="279.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
