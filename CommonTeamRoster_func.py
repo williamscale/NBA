@@ -5,8 +5,8 @@ from nba_api.stats.endpoints import commonteamroster as ctr
 def create_roster(season, team, struc):
 
 	response = ctr.CommonTeamRoster(
-		season = '2020-21',
-		team_id = 1610612759)
+		season = season,
+		team_id = team)
 
 	content = json.loads(response.get_json())
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
 	season = '2020-21'	
 	team = 1610612759
-	struc = 'list'
+	struc = 'df'
 	
 	roster = create_roster(season, team, struc)
-
+	print(roster)
