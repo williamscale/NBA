@@ -8,11 +8,12 @@ from nba_api.stats.static import players
 from nba_api.stats.endpoints import shotchartdetail
 from matplotlib.patches import Circle, Rectangle, Arc
 import CommonTeamRoster_func
-import time
 
 season = '2020-21'
 team = 1610612759
 struc = 'df'
+
+plot_flag = 1
 
 roster_df = CommonTeamRoster_func.create_roster(season, team, struc)
 roster_df = roster_df.loc[roster_df['EXP'] != 'R']
@@ -49,8 +50,6 @@ for player_roster in roster:
 		#period = '4',
 	)
 
-	time.sleep(0.1)
-
 	content = json.loads(response.get_json())
 
 	# transform contents into dataframe
@@ -83,10 +82,8 @@ for player_roster in roster:
 	successful_byZone = fg_attempt.groupby('SHOT_ZONE_BASIC')['SHOT_MADE_FLAG'].sum()
 	pct_byZone = fg_attempt.groupby('SHOT_ZONE_BASIC')['SHOT_MADE_FLAG'].sum() / fg_attempt.groupby('SHOT_ZONE_BASIC')['SHOT_ATTEMPTED_FLAG'].sum()
 	
-	#print(fg_make)
 	#print('\n\n', attempted_byZone, '\n\n', successful_byZone, '\n\n', pct_byZone)
 
-	#abovebreak_3_list.append(attempted_byZone['Above the Break 3'])
 	if not abovebreak_3.empty:
 
 		abovebreak_3_list.append(attempted_byZone['Above the Break 3'])
@@ -118,30 +115,35 @@ for player_roster in roster:
 		paint_player_list.append(player_roster)
 
 zones_df = pd.DataFrame()
+
+# restricted area
 zones_df['Player'] = restricted_player_list
 zones_df['Attempted'] = restricted_list
-print(zones_df)
-# Create figure
-#fig_court, ax_court = plt.subplots(1)
 
-#NBA_court_zones.draw_NBA_court(
-#	color = 'black',
-#	lw = 2,
-#	zones_flag = 0)
+if plot_flag == 1:
 
-# Plot data
-#ax_court.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = '.', alpha = 0.7)
-#ax_court.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = '.', alpha = 0.7)
+	# create figure
+	fig_court, ax_court = plt.subplots(1)
 
-# Plot data by zone
-#ax_court.scatter(abovebreak_3['LOC_X'], abovebreak_3['LOC_Y'], c = 'orange', marker = '.', alpha = 1)
-#ax_court.scatter(corner3_right['LOC_X'], corner3_right['LOC_Y'], c = 'red', marker = '.', alpha = 1)
-#ax_court.scatter(corner3_left['LOC_X'], corner3_left['LOC_Y'], c = 'green', marker = '.', alpha = 1)
-#ax_court.scatter(midrange['LOC_X'], midrange['LOC_Y'], c = 'black', marker = '.', alpha = 1)
-#ax_court.scatter(restricted['LOC_X'], restricted['LOC_Y'], c = 'indigo', marker = '.', alpha = 1)
-#ax_court.scatter(paint['LOC_X'], paint['LOC_Y'], c = 'blue', marker = '.', alpha = 1)
+	NBA_court_zones.draw_NBA_court(
+		color = 'black',
+		lw = 2,
+		zones_flag = 0)
 
-# Create title
-#ax_court.set(title = name)
+	# plot data
+	ax_court.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = '.', alpha = 0.7)
+	ax_court.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = '.', alpha = 0.7)
 
-#plt.show()
+	# plot data by zone
+	ax_court.scatter(abovebreak_3['LOC_X'], abovebreak_3['LOC_Y'], c = 'orange', marker = '.', alpha = 1)
+	ax_court.scatter(corner3_right['LOC_X'], corner3_right['LOC_Y'], c = 'red', marker = '.', alpha = 1)
+	ax_court.scatter(corner3_left['LOC_X'], corner3_left['LOC_Y'], c = 'green', marker = '.', alpha = 1)
+	ax_court.scatter(midrange['LOC_X'], midrange['LOC_Y'], c = 'black', marker = '.', alpha = 1)
+	ax_court.scatter(restricted['LOC_X'], restricted['LOC_Y'], c = 'indigo', marker = '.', alpha = 1)
+	ax_court.scatter(paint['LOC_X'], paint['LOC_Y'], c = 'blue', marker = '.', alpha = 1)
+
+	# create title
+	ax_court.set(title = name)
+
+	plt.show()
+
