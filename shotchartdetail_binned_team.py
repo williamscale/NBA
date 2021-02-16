@@ -4,10 +4,10 @@ import pandas as pd
 from nba_api.stats.endpoints import commonplayerinfo as cpi 
 import json
 import NBA_court_zones
-from nba_api.stats.static import players
 from nba_api.stats.endpoints import shotchartdetail
 from matplotlib.patches import Circle, Rectangle, Arc
 import CommonTeamRoster_func
+from CommonAllPlayers_func import get_playerid
 
 season = '2020-21'
 team = 1610612759
@@ -34,16 +34,14 @@ paint_player_list = []
 
 for player_roster in roster:
 
-	player_dict = players.get_players()
-
 	name = player_roster
 	#print('\n\n', name, '\n\n')
 
-	player = [player for player in player_dict if player['full_name'] == name][0]
+	playerid = get_playerid(name)
 
 	response = shotchartdetail.ShotChartDetail(
 		team_id = 0, 
-		player_id = player['id'],
+		player_id = playerid,
 		context_measure_simple = 'FGA', # FGA/FG3A are made & missed
 		#season_type_all_star = 'Regular Season',
 		season_nullable = '2020-21'
