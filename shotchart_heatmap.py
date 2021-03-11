@@ -12,9 +12,8 @@ import seaborn as sns
 import numpy as np
 from scipy import stats
 
-#name = input("Insert player name. (case sensitive)\n")
-name = 'Kevin Garnett'
-season = '2003-04'
+name = input("Insert player name. (case sensitive)\n")
+season = input("Insert season in format YYYY-YY.\n")
 
 start_time = time.time()
 
