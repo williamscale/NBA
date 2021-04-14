@@ -3,13 +3,18 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 import time
-from CommonAllPlayers_func import get_playerid
-from CommonPlayerInfo_func import get_height
 import pickle
 import random
+import os
+import sys
+
+file_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(file_dir, '..', '..', 'Players'))
+
+from CommonAllPlayers_Func import get_playerid
+from CommonPlayerInfo_Func import get_height
 
 plt.style.use('dark_background')
-#plt.style.use('Solarize_Light2')
 
 corner3_df = pd.read_pickle(r'C:/Users/caler/Documents/MyProjects/NBA/Pickles/corner3_leaders_01to21.pkl')
 
