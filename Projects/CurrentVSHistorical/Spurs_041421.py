@@ -18,6 +18,3 @@ ptsDif_df = CumVsFinal_func.create_ptsDif_CumVsRecord_df(start_year, end_year, p
 
 print('\n\nBY RECORD:\n')
 records_df = CumVsFinal_func.create_record_CumVsFinal_df(start_year, end_year, record)
-
-# print(ptsDif_df)
-# print(records_df)
