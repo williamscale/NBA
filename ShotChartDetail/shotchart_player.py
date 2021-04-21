@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Rectangle, Arc
 import seaborn as sns
 from scipy import stats
+from tabulate import tabulate
 from nba_api.stats.endpoints import commonplayerinfo as cpi, shotchartdetail
 
 # local imports
@@ -24,10 +25,13 @@ from CommonAllPlayers_Func import get_playerid
 sys.path.append(os.path.join(file_dir, '..', 'PlottingSupport'))
 import add_twitterhandle as tweet
 
-def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular Season', period = 0, plot_flag = 1, bin_edge_count = 15):
+def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular Season', period = 0, plot_flag = 1, twitter_flag = 1, bin_edge_count = 15):
 
 	# start timer
 	start_time = time.time()
+
+	# print title
+	print('--------------------\n', player[0], '\n', season, '\n--------------------', '\n\n', sep = '')
 
 	# get player ID from name input
 	playerid = get_playerid(player)
@@ -62,91 +66,115 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 	# all unsuccessful field goals
 	fg_miss = fg_attempt.loc[fg_attempt['SHOT_MADE_FLAG'] == 0]
 
-	furthest_make_ft = fg_make['shot_dist'].max() / (5 / 6 * 12)
-	avg_make_ft = fg_make['shot_dist'].mean() / (5 / 6 * 12)
+	# successful field goal statistics
+	furthest_ft = round(fg_make['shot_dist'].max() / (5 / 6 * 12), 1)
+	avg_ft = round(fg_make['shot_dist'].mean() / (5 / 6 * 12), 1)
+	std_ft = round(fg_make['shot_dist'].std() / (5 / 6 * 12), 1)
+	var_ft = round(fg_make['shot_dist'].var() / (5 / 6 * 12), 1)
 
+	# create summary table of stats
+	stats_headers = [['Furthest', 'Average', 'Standard Deviation', 'Variance'], [furthest_ft, avg_ft, std_ft, var_ft]]
+	print('SHOT DISTANCE:\n', tabulate(stats_headers, headers = 'firstrow', tablefmt = 'fancy_grid'), sep = '')
+
+	# categorize field goals by NBA-defined zones
 	make_dict, miss_dict = ShotChartZones_Func.create_dict_shotzones_df(fg_make, fg_miss)
 
-	# Create figures
-	fig_court1, ax_court1 = plt.subplots()
-	# tweet.add_twitterhandle(fig_court1)
+	print('\n\n', 'MADE FIELD GOALS:\n', fg_make)
+	
+	# create plots
+	if plot_flag == 1:
 
-	ax, x_min, x_max, y_min, y_max = NBA_court_zones.draw_NBA_court(
-		color = 'white',
-		lw = 2,
-		zones_flag = 0)
+		# create figures with shot charts
+		fig_court1, ax_court1 = plt.subplots()
 
-	fig_court2, ax_court2 = plt.subplots()
-	tweet.add_twitterhandle(fig_court2)
+		ax, x_min, x_max, y_min, y_max = NBA_court_zones.draw_NBA_court(
+			color = 'white',
+			lw = 2,
+			zones_flag = 0)
 
-	ax, x_min, x_max, y_min, y_max = NBA_court_zones.draw_NBA_court(
-		color = 'white',
-		lw = 2,
-		zones_flag = 0)
+		if twitter_flag == 1:
 
-	#fig_box, ax_box = plt.subplots()
-	#plt.boxplot(fg_make['shot_dist'])
+			tweet.add_twitterhandle(fig_court1)
 
-	fg_make_loc = fg_make[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
-	fg_miss_loc = fg_miss[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
-	fg_attempt_loc = fg_attempt[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
+		fig_court2, ax_court2 = plt.subplots()
+		
+		ax, x_min, x_max, y_min, y_max = NBA_court_zones.draw_NBA_court(
+			color = 'white',
+			lw = 2,
+			zones_flag = 0)
 
-	court_bin_make, xedges_make, yedges_make, binnumber_make = stats.binned_statistic_2d(
-		x = fg_make_loc['LOC_X'],
-		y = fg_make_loc['LOC_Y'],
-		values = None,
-		statistic = 'count',
-		bins = bin_edge_count,
-		range = ((x_min, x_max), (y_min, y_max))
-		)
+		if twitter_flag == 1:
 
-	court_bin_attempt, xedges_attempt, yedges_attempt, binnumber_attempt = stats.binned_statistic_2d(
-		x = fg_attempt_loc['LOC_X'],
-		y = fg_attempt_loc['LOC_Y'],
-		values = None,
-		statistic = 'count',
-		bins = bin_edge_count,
-		range = ((x_min, x_max), (y_min, y_max))
-		)
+			tweet.add_twitterhandle(fig_court2)
 
-	fg_eff = court_bin_attempt
+		# create dataframes of makes, misses, and all
+		fg_make_loc = fg_make[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
+		fg_miss_loc = fg_miss[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
+		fg_attempt_loc = fg_attempt[['LOC_X', 'LOC_Y']].copy().reset_index(drop = True)
 
-	for bin_i in range(0, bin_edge_count):
+		# bin succcessful field goals by location
+		court_bin_make, xedges_make, yedges_make, binnumber_make = stats.binned_statistic_2d(
+			x = fg_make_loc['LOC_X'],
+			y = fg_make_loc['LOC_Y'],
+			values = None,
+			statistic = 'count',
+			bins = bin_edge_count,
+			range = ((x_min, x_max), (y_min, y_max))
+			)
 
-		for bin_j in range(0, bin_edge_count):
-			
-			fg_eff[bin_i][bin_j] = court_bin_make[bin_i][bin_j] / court_bin_attempt[bin_i][bin_j]
+		# bin all field goals by location
+		court_bin_attempt, xedges_attempt, yedges_attempt, binnumber_attempt = stats.binned_statistic_2d(
+			x = fg_attempt_loc['LOC_X'],
+			y = fg_attempt_loc['LOC_Y'],
+			values = None,
+			statistic = 'count',
+			bins = bin_edge_count,
+			range = ((x_min, x_max), (y_min, y_max))
+			)
 
-	cmap_discrete = plt.cm.get_cmap('viridis', 10)
+		# count of all field goals in each bin
+		fg_eff = court_bin_attempt
 
-	xedges, yedges = np.meshgrid(xedges_make, yedges_make)
+		# loop through bins
+		for bin_i in range(0, bin_edge_count):
 
-	plot_eff2 = ax_court2.pcolormesh(xedges, yedges, fg_eff.T, cmap = cmap_discrete)
-	cbar2 = plt.colorbar(plot_eff2, ax = ax_court2)
+			# loop through bins
+			for bin_j in range(0, bin_edge_count):
+				
+				# divide successful field goal count by attempted field goal count for each bin
+				fg_eff[bin_i][bin_j] = court_bin_make[bin_i][bin_j] / court_bin_attempt[bin_i][bin_j]
 
-	# Plot data
-	ax_court1.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = 'o', alpha = 1, s = 3)
-	# ax_court1.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = 'x', alpha = 0.8)
+		# select color map and quantity of colors
+		cmap_discrete = plt.cm.get_cmap('viridis', 10)
 
-	# Set titles
-	ax_court1.set(title = player[0] + ' ' + season)
-	# ax_court2.set(title = name[0] + ' ' + season + ' FG%')
-	# ax_court1.set(title = name[0])
-	ax_court2.set(title = player[0] + ' FG%')
+		# mesh grid based on bin edges
+		xedges, yedges = np.meshgrid(xedges_make, yedges_make)
+		plot_eff2 = ax_court2.pcolormesh(xedges, yedges, fg_eff.T, cmap = cmap_discrete)
+		cbar2 = plt.colorbar(plot_eff2, ax = ax_court2)
 
-	# Set background colors
-	ax_court1.set_facecolor('black')
-	ax_court2.set_facecolor('black')
+		# Plot data
+		ax_court1.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = 'o', alpha = 1, s = 3)
+		# ax_court1.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = 'x', alpha = 0.8)
 
-	# Remove axes ticks
-	ax_court1.set_xticks([])
-	ax_court1.set_yticks([])
-	ax_court2.set_xticks([])
-	ax_court2.set_yticks([])
+		# Set titles
+		ax_court1.set(title = player[0] + ' ' + season)
+		# ax_court2.set(title = name[0] + ' ' + season + ' FG%')
+		# ax_court1.set(title = name[0])
+		ax_court2.set(title = player[0] + ' FG%')
 
-	print('\n--- %s seconds ---\n' % (time.time() - start_time))
+		# Set background colors
+		ax_court1.set_facecolor('black')
+		ax_court2.set_facecolor('black')
 
-	plt.show()
+		# Remove axes ticks
+		ax_court1.set_xticks([])
+		ax_court1.set_yticks([])
+		ax_court2.set_xticks([])
+		ax_court2.set_yticks([])
+
+		print('\n--- %s seconds ---\n' % (time.time() - start_time))
+
+		plt.show()
 
 	return fg_make
 
@@ -157,7 +185,8 @@ if __name__ == '__main__':
 	fg_type = 'FGA'
 	season_type = 'Regular Season'
 	period = 0
-	plot_flag = 1
+	plot_flag = 0
+	twitter_flag = 1
 	bin_edge_count = 10
 
-	fg_make = player_shotchart(player, season, fg_type, season_type, period, plot_flag, bin_edge_count)
+	fg_make = player_shotchart(player, season, fg_type, season_type, period, plot_flag, twitter_flag, bin_edge_count)
