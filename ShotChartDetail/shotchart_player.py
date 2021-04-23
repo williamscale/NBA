@@ -142,7 +142,13 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 			for bin_j in range(0, bin_edge_count):
 				
 				# divide successful field goal count by attempted field goal count for each bin
-				fg_eff[bin_i][bin_j] = court_bin_make[bin_i][bin_j] / court_bin_attempt[bin_i][bin_j]
+				if court_bin_attempt[bin_i][bin_j] == 0:
+
+					fg_eff[bin_i][bin_j] = 0
+
+				else:
+
+					fg_eff[bin_i][bin_j] = court_bin_make[bin_i][bin_j] / court_bin_attempt[bin_i][bin_j]
 
 		# select color map and quantity of colors
 		cmap_discrete = plt.cm.get_cmap('viridis', 10)
