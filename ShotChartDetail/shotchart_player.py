@@ -25,7 +25,7 @@ from CommonAllPlayers_Func import get_playerid
 sys.path.append(os.path.join(file_dir, '..', 'PlottingSupport'))
 import add_twitterhandle as tweet
 
-def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular Season', period = 0, plot_flag = 1, twitter_flag = 1, bin_edge_count = 15):
+def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular Season', period = 0, plot_flag = 1, twitter_flag = 1, bin_edge_count = 15, plot_fg = 'all', savefig_flag = 0):
 
 	# start timer
 	start_time = time.time()
@@ -80,7 +80,7 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 	make_dict, miss_dict = ShotChartZones_Func.create_dict_shotzones_df(fg_make, fg_miss)
 
 	print('\n\n', 'MADE FIELD GOALS:\n', fg_make)
-	
+
 	# create plots
 	if plot_flag == 1:
 
@@ -152,25 +152,45 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 		plot_eff2 = ax_court2.pcolormesh(xedges, yedges, fg_eff.T, cmap = cmap_discrete)
 		cbar2 = plt.colorbar(plot_eff2, ax = ax_court2)
 
-		# Plot data
-		ax_court1.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = 'o', alpha = 1, s = 3)
-		# ax_court1.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = 'x', alpha = 0.8)
+		if plot_fg == 'makes':
 
-		# Set titles
-		ax_court1.set(title = player[0] + ' ' + season)
-		# ax_court2.set(title = name[0] + ' ' + season + ' FG%')
-		# ax_court1.set(title = name[0])
-		ax_court2.set(title = player[0] + ' FG%')
+			# plot successful field goals
+			ax_court1.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = 'o', alpha = 1, s = 10)
 
-		# Set background colors
+		elif plot_fg == 'misses':
+
+			# plot unsuccessful field goals
+			ax_court1.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = 'x', alpha = 0.8, s = 10)
+
+		else:
+
+			# plot all field goals
+			ax_court1.scatter(fg_make['LOC_X'], fg_make['LOC_Y'], c = 'green', marker = 'o', alpha = 1, s = 10)
+			ax_court1.scatter(fg_miss['LOC_X'], fg_miss['LOC_Y'], c = 'red', marker = 'x', alpha = 0.6, s = 10)
+
+		# set titles
+		ax_court1.set(title = player[0] + ', ' + season)
+		ax_court2.set(title = player[0] + ', FG%, ' + season)
+
+		# set background colors
 		ax_court1.set_facecolor('black')
 		ax_court2.set_facecolor('black')
 
-		# Remove axes ticks
+		# remove axes ticks
 		ax_court1.set_xticks([])
 		ax_court1.set_yticks([])
 		ax_court2.set_xticks([])
 		ax_court2.set_yticks([])
+
+		if savefig_flag == 1:
+
+			image_type = '.jpeg'
+
+			fig1_name = player[0] + '_' + season + '_shotchart' + image_type
+			fig2_name = player[0] + '_' + season + '_shotchartEff' + image_type
+
+			fig_court1.savefig(fig1_name, dpi = 1000, bbox_inches = 'tight')
+			fig_court2.savefig(fig2_name, dpi = 1000, bbox_inches = 'tight')
 
 		print('\n--- %s seconds ---\n' % (time.time() - start_time))
 
@@ -185,8 +205,10 @@ if __name__ == '__main__':
 	fg_type = 'FGA'
 	season_type = 'Regular Season'
 	period = 0
-	plot_flag = 0
+	plot_flag = 1
 	twitter_flag = 1
 	bin_edge_count = 10
+	plot_fg = 'all'
+	savefig_flag = 1
 
-	fg_make = player_shotchart(player, season, fg_type, season_type, period, plot_flag, twitter_flag, bin_edge_count)
+	fg_make = player_shotchart(player, season, fg_type, season_type, period, plot_flag, twitter_flag, bin_edge_count, plot_fg, savefig_flag)
