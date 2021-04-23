@@ -184,11 +184,14 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 
 		if savefig_flag == 1:
 
+			# specify file type
 			image_type = '.jpeg'
 
+			# specify file name
 			fig1_name = player[0] + '_' + season + '_shotchart' + image_type
 			fig2_name = player[0] + '_' + season + '_shotchartEff' + image_type
 
+			# save file
 			fig_court1.savefig(fig1_name, dpi = 1000, bbox_inches = 'tight')
 			fig_court2.savefig(fig2_name, dpi = 1000, bbox_inches = 'tight')
 
