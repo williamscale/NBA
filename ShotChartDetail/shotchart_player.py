@@ -215,9 +215,9 @@ if __name__ == '__main__':
 	season_type = 'Regular Season'
 	period = 0
 	plot_flag = 1
-	twitter_flag = 1
+	twitter_flag = 0
 	bin_edge_count = 10
 	plot_fg = 'all'
-	savefig_flag = 1
+	savefig_flag = 0
 
 	fg_make = player_shotchart(player, season, fg_type, season_type, period, plot_flag, twitter_flag, bin_edge_count, plot_fg, savefig_flag)
