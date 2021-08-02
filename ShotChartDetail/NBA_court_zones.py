@@ -130,26 +130,26 @@ def draw_NBA_court(color, lw, zones_flag, ax = None):
 		color = color)
 
 	# 6 feet radius
-	halfcourt_outer_rad = 6 * 12
-	halfcourt_outer = Arc((hoop_center[0] * factor, halfcourt_y * factor),
-		width = halfcourt_outer_rad * 2 * factor,
-		height = halfcourt_outer_rad * 2 * factor,
-		angle = 0,
-		theta1 = 180,
-		theta2 = 0,
-		linewidth = lw,
-		color = color)
+	# halfcourt_outer_rad = 6 * 12
+	# halfcourt_outer = Arc((hoop_center[0] * factor, halfcourt_y * factor),
+	# 	width = halfcourt_outer_rad * 2 * factor,
+	# 	height = halfcourt_outer_rad * 2 * factor,
+	# 	angle = 0,
+	# 	theta1 = 180,
+	# 	theta2 = 0,
+	# 	linewidth = lw,
+	# 	color = color)
 
-	# 2 feet radius
-	halfcourt_inner_rad = 2 * 12
-	halfcourt_inner = Arc((hoop_center[0] * factor, halfcourt_y * factor),
-		width = halfcourt_inner_rad * 2 * factor,
-		height = halfcourt_inner_rad * 2 * factor,
-		angle = 0,
-		theta1 = 180,
-		theta2 = 0,
-		linewidth = lw,
-		color = color)
+	# # 2 feet radius
+	# halfcourt_inner_rad = 2 * 12
+	# halfcourt_inner = Arc((hoop_center[0] * factor, halfcourt_y * factor),
+	# 	width = halfcourt_inner_rad * 2 * factor,
+	# 	height = halfcourt_inner_rad * 2 * factor,
+	# 	angle = 0,
+	# 	theta1 = 180,
+	# 	theta2 = 0,
+	# 	linewidth = lw,
+	# 	color = color)
 	
 	corner3_left_bounds = [-baseline_width / 2 * factor,
 		baseline_y * factor,
@@ -164,7 +164,7 @@ def draw_NBA_court(color, lw, zones_flag, ax = None):
 		alpha = 0.4)
 
 	# list of patches
-	court_list = [hoop, paint, freethrow_circle, three_arc, restricted_arc, halfcourt_outer, halfcourt_inner]
+	court_list = [hoop, paint, freethrow_circle, three_arc, restricted_arc]
 
 	if zones_flag == 0:
 
