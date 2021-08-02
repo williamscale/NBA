@@ -9,3 +9,11 @@ def add_twitterhandle(fig_num):
 		color = 'white',
 		fontstyle = 'italic'
 		)
+
+	# plt.text(x = 34,
+	# 	y = 30,
+	# 	s = '\u0040cale_williams',
+	# 	color = 'black',
+	# 	fontstyle = 'italic',
+	# 	fontsize = '6'
+	# 	)
