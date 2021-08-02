@@ -116,9 +116,10 @@ def get_playerid(player_name = []):
 
 if __name__ == '__main__':
 
-	player_name = ['Toby Bailey', 'Patty Mills', 'Dejounte Murray']
-	a, b = create_currentplayers_lists(teams = 'Spurs')
-	#c, d, e = create_players_list(season = '2015')
-	f = get_playerid(player_name)
+	# player_name = ['Toby Bailey', 'Patty Mills', 'Dejounte Murray']
+	# a, b = create_currentplayers_lists()
+	c, d, e = create_players_list(season = '2021')
+	# f = get_playerid()
 
-	print(a)
+	# print(len(b), len(a))
+	print(c)
