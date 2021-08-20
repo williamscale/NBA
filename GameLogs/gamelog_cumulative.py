@@ -8,7 +8,7 @@ import os
 import sys
 
 file_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(file_dir, '..'))
+sys.path.append(os.path.join(file_dir, '..', 'Misc'))
 
 import list_func
 
@@ -96,3 +96,4 @@ if __name__ == '__main__':
 	year = '1998-99'
 	column_cum = 'Points Differential'
 	x = create_gamelogCum_df(year, column_cum)
+	print(x)
