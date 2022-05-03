@@ -1,0 +1,245 @@
+# Author: Cale Williams
+# Last Updated: 01/02/2022
+
+# ADMINISTRATIVE WORK -----------------------------------------------------
+
+# Clear workspace and set seed.
+rm(list = ls())
+set.seed(55)
+
+# Import libraries.
+library(readxl)
+library(dplyr)
+library(stringr)
+library(stats)
+library(ggplot2)
+
+setwd('MyProjects/NBA/R/Projects/AllNBA_positions')
+
+source('../../Scrapers/bballref_playerlinks.R')
+source('../../Scrapers/bballref_player.R')
+
+# PREPARE DATA ------------------------------------------------------------
+
+# Get all players listed in basketball reference.
+players <- player_url_bballref(player = 'ALL')
+
+# Read in All-NBA team data.
+allnba <- read_excel('AllNBA.xlsx',
+                     col_names = FALSE)
+
+# Change name of columns.
+cols <- c('Season', 'Team', 'C', 'F1', 'F2', 'G1', 'G2')
+names(allnba) <- cols
+
+# Remove position from entries.
+allnba$C <- str_sub(allnba$C, 1, nchar(allnba$C) - 2)
+allnba$F1 <- str_sub(allnba$F1, 1, nchar(allnba$F1) - 2)
+allnba$F2 <- str_sub(allnba$F2, 1, nchar(allnba$F2) - 2)
+allnba$G1 <- str_sub(allnba$G1, 1, nchar(allnba$G1) - 2)
+allnba$G2 <- str_sub(allnba$G2, 1, nchar(allnba$G2) - 2)
+
+# Remove data in which positional proportion is unavailable.
+# allnba_positions <- allnba[allnba[, 'Season'] >= '1996-97', ]
+
+# CENTER ------------------------------------------------------------------
+
+# Combine datasets.
+C_urls <- left_join(allnba,
+                    players,
+                    by = c('C' = 'player_name')) %>%
+  dplyr::select(C, Season, Team, player_url) %>%
+  arrange(desc(Season), Team)
+  
+# Remove Patrick Ewing (son).
+C_urls <- C_urls[!C_urls$player_url == 'https://www.basketball-reference.com/players/e/ewingpa02.html', ]
+
+assertthat::are_equal(nrow(allnba), nrow(C_urls))
+
+# FORWARDS ----------------------------------------------------------------
+
+# Combine datasets.
+F1_urls <- left_join(allnba,
+                     players,
+                     by = c('F1' = 'player_name')) %>%
+  dplyr::select(F1, Season, Team, player_url) %>%
+  arrange(desc(Season), Team) %>%
+  rename('F' = 'F1')
+
+# Remove Larry Johnson.
+# https://www.basketball-reference.com/players/l/leeda01.html
+F1_urls <- F1_urls[!F1_urls$player_url == 'https://www.basketball-reference.com/players/j/johnsla01.html', ]
+
+F2_urls <- left_join(allnba,
+                     players,
+                     by = c('F2' = 'player_name')) %>%
+  dplyr::select(F2, Season, Team, player_url) %>%
+  arrange(desc(Season), Team) %>%
+  rename('F' = 'F2')
+
+# Remove David Lee.
+# https://www.basketball-reference.com/players/l/leeda01.html
+F2_urls <- F2_urls[!F2_urls$player_url == 'https://www.basketball-reference.com/players/l/leeda01.html', ]
+
+assertthat::are_equal(nrow(allnba), nrow(F1_urls))
+assertthat::are_equal(nrow(allnba), nrow(F2_urls))
+
+# Combine datasets.
+F_urls <- rbind(F1_urls, F2_urls) %>%
+  arrange(desc(Season), Team)
+
+# GUARDS ------------------------------------------------------------------
+
+# Combine datasets.
+G1_urls <- left_join(allnba,
+                     players,
+                     by = c('G1' = 'player_name')) %>%
+  dplyr::select(G1, Season, Team, player_url) %>%
+  arrange(desc(Season), Team) %>%
+  rename('G' = 'G1')
+
+G2_urls <- left_join(allnba,
+                     players,
+                     by = c('G2' = 'player_name')) %>%
+  dplyr::select(G2, Season, Team, player_url) %>%
+  arrange(desc(Season), Team) %>%
+  rename('G' = 'G2')
+
+assertthat::are_equal(nrow(allnba), nrow(G1_urls))
+assertthat::are_equal(nrow(allnba), nrow(G2_urls))
+
+# Combine datasets.
+G_urls <- rbind(G1_urls, G2_urls) %>%
+  arrange(desc(Season), Team)
+
+# RETRIEVE STATS -----------------------------------------------------------
+
+C_3Ppct <- c()
+C_2Ppct <- c()
+C_eFG <- c()
+C_TRB <- c()
+C_AST <- c()
+C_TOV <- c()
+C_PTS <- c()
+
+F_3Ppct <- c()
+F_2Ppct <- c()
+F_eFG <- c()
+F_TRB <- c()
+F_AST <- c()
+F_TOV <- c()
+F_PTS <- c()
+
+G_3Ppct <- c()
+G_2Ppct <- c()
+G_eFG <- c()
+G_TRB <- c()
+G_AST <- c()
+G_TOV <- c()
+G_PTS <- c()
+
+for (i in 1:nrow(C_urls)) {
+  
+  C_year <- C_urls$Season[i]
+  
+  C_data_i <- player_bballref(C_urls$player_url[i], 1)
+  
+  C_row_i <- which(C_data_i$Season == C_year)[1]
+  
+  C_3Ppct <- c(C_3Ppct, C_data_i[C_row_i, '3P%'])
+  C_2Ppct <- c(C_2Ppct, C_data_i[C_row_i, '2P%'])
+  C_eFG <- c(C_eFG, C_data_i[C_row_i, 'eFG%'])
+  C_TRB <- c(C_TRB, C_data_i[C_row_i, 'TRB'])
+  C_AST <- c(C_AST, C_data_i[C_row_i, 'AST'])
+  C_TOV <- c(C_TOV, C_data_i[C_row_i, 'TOV'])
+  C_PTS <- c(C_PTS, C_data_i[C_row_i, 'PTS'])
+  
+}
+
+for (i in 1:nrow(F_urls)) {
+  
+  F_year <- F_urls$Season[i]
+  
+  F_data_i <- player_bballref(F_urls$player_url[i], 1)
+  
+  F_row_i <- which(F_data_i$Season == F_year)[1]
+  
+  F_3Ppct <- c(F_3Ppct, F_data_i[F_row_i, '3P%'])
+  F_2Ppct <- c(F_2Ppct, F_data_i[F_row_i, '2P%'])
+  F_eFG <- c(F_eFG, F_data_i[F_row_i, 'eFG%'])
+  F_TRB <- c(F_TRB, F_data_i[F_row_i, 'TRB'])
+  F_AST <- c(F_AST, F_data_i[F_row_i, 'AST'])
+  F_TOV <- c(F_TOV, F_data_i[F_row_i, 'TOV'])
+  F_PTS <- c(F_PTS, F_data_i[F_row_i, 'PTS'])
+  
+  G_year <- G_urls$Season[i]
+  
+  G_data_i <- player_bballref(G_urls$player_url[i], 1)
+  
+  G_row_i <- which(G_data_i$Season == G_year)[1]
+  
+  G_3Ppct <- c(G_3Ppct, G_data_i[G_row_i, '3P%'])
+  G_2Ppct <- c(G_2Ppct, G_data_i[G_row_i, '2P%'])
+  G_eFG <- c(G_eFG, G_data_i[G_row_i, 'eFG%'])
+  G_TRB <- c(G_TRB, G_data_i[G_row_i, 'TRB'])
+  G_AST <- c(G_AST, G_data_i[G_row_i, 'AST'])
+  G_TOV <- c(G_TOV, G_data_i[G_row_i, 'TOV'])
+  G_PTS <- c(G_PTS, G_data_i[G_row_i, 'PTS'])
+  
+}
+
+C_urls$pct3P <- as.numeric(C_3Ppct)
+C_urls$pct2P <- as.numeric(C_2Ppct)
+C_urls$eFG <- as.numeric(C_eFG)
+C_urls$TRB <- as.numeric(C_TRB)
+C_urls$AST <- as.numeric(C_AST)
+C_urls$TOV <- as.numeric(C_TOV)
+C_urls$PTS <- as.numeric(C_PTS)
+
+F_urls$pct3P <- as.numeric(F_3Ppct)
+F_urls$pct2P <- as.numeric(F_2Ppct)
+F_urls$eFG <- as.numeric(F_eFG)
+F_urls$TRB <- as.numeric(F_TRB)
+F_urls$AST <- as.numeric(F_AST)
+F_urls$TOV <- as.numeric(F_TOV)
+F_urls$PTS <- as.numeric(F_PTS)
+
+G_urls$pct3P <- as.numeric(G_3Ppct)
+G_urls$pct2P <- as.numeric(G_2Ppct)
+G_urls$eFG <- as.numeric(G_eFG)
+G_urls$TRB <- as.numeric(G_TRB)
+G_urls$AST <- as.numeric(G_AST)
+G_urls$TOV <- as.numeric(G_TOV)
+G_urls$PTS <- as.numeric(G_PTS)
+
+
+# 
+# C_kmeans <- kmeans(x = C_urls[, c(6, 7, 10)],
+#                    centers = 3)
+# 
+# F_kmeans <- kmeans(x = F_urls[, 5:10],
+#                    centers = 3)
+# 
+# G_kmeans <- kmeans(x = G_urls[, 5:10],
+#                    centers = 3)
+# 
+# 
+# 
+# C_plot <- ggplot(data = C_urls,
+#                  aes(x = PTS,
+#                      y = TRB)) +
+#   geom_point()
+# 
+# F_plot <- ggplot(data = F_urls,
+#                  aes(x = PTS,
+#                      y = TRB)) +
+#   geom_point()
+# 
+G_plot <- ggplot(data = G_urls,
+                 aes(x = PTS,
+                     y = eFG)) +
+  geom_point()
+# 
+# C_plot
+# F_plot
+G_plot
