@@ -62,7 +62,7 @@ def create_players_list(season):
 		league_id = '00'
 		)
 
-	time.sleep(0.5)
+	time.sleep(0.2)
 
 	content = json.loads(response.get_json())
 
