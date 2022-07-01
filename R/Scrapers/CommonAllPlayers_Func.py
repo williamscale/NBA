@@ -116,10 +116,12 @@ def get_playerid(player_name = []):
 
 if __name__ == '__main__':
 
-	# player_name = ['Toby Bailey', 'Patty Mills', 'Dejounte Murray']
+	# players_test = ['Precious Achiuwa', 'Patty Mills', 'Dejounte Murray']
+	players_test = ['Precious Achiuwa']
 	# a, b = create_currentplayers_lists()
-	c, d, e = create_players_list(season = '2021')
-	# f = get_playerid()
+	# c, d, e = create_players_list(season = '2021')
+	f = get_playerid(player_name = players_test)
 
 	# print(len(b), len(a))
-	print(c)
+	# print(len(b))
+	print(f)
