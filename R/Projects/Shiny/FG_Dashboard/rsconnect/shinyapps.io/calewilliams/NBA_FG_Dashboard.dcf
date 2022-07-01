@@ -1,0 +1,14 @@
+name: NBA_FG_Dashboard
+title: NBA_FG_Dashboard
+username:
+account: calewilliams
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6557171
+bundleId: 6048389
+url: https://calewilliams.shinyapps.io/NBA_FG_Dashboard/
+when: 1656366041.61543
+lastSyncTime: 1656366041.61543
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Data/data_raw_2021-22.RData|Data/playin_2021-22.RData|Data/playoffs_2021-22.RData|Data/regularseason_2021-22.RData

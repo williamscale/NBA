@@ -1,0 +1,14 @@
+name: FG_Dashboard
+title: FG_Dashboard
+username:
+account: calewilliams
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6559032
+bundleId: 6048422
+url: https://calewilliams.shinyapps.io/FG_Dashboard/
+when: 1656366741.94279
+lastSyncTime: 1656366741.94279
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Data/data_raw_2021-22.RData|Data/playin_2021-22.RData|Data/playoffs_2021-22.RData|Data/regularseason_2021-22.RData
