@@ -1,0 +1,8 @@
+,GRID_TYPE,GAME_ID,GAME_EVENT_ID,PLAYER_ID,PLAYER_NAME,TEAM_ID,TEAM_NAME,PERIOD,MINUTES_REMAINING,SECONDS_REMAINING,EVENT_TYPE,ACTION_TYPE,SHOT_TYPE,SHOT_ZONE_BASIC,SHOT_ZONE_AREA,SHOT_ZONE_RANGE,SHOT_DISTANCE,LOC_X,LOC_Y,SHOT_ATTEMPTED_FLAG,SHOT_MADE_FLAG,GAME_DATE,HTM,VTM
+0,Shot Chart Detail,0052100111,210,1626153,Delon Wright,1610612737,Atlanta Hawks,2,10,2,Made Shot,Pullup Jump shot,3PT Field Goal,Above the Break 3,Center(C),24+ ft.,26,-81,256,1,1,20220413,ATL,CHA
+1,Shot Chart Detail,0052100111,257,1626153,Delon Wright,1610612737,Atlanta Hawks,2,7,19,Missed Shot,Turnaround Fadeaway shot,2PT Field Goal,Mid-Range,Right Side(R),8-16 ft.,10,-100,25,1,0,20220413,ATL,CHA
+2,Shot Chart Detail,0052100111,496,1626153,Delon Wright,1610612737,Atlanta Hawks,3,2,16,Made Shot,Tip Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,0,0,0,1,1,20220413,ATL,CHA
+3,Shot Chart Detail,0052100111,506,1626153,Delon Wright,1610612737,Atlanta Hawks,3,1,40,Made Shot,Driving Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,1,-1,13,1,1,20220413,ATL,CHA
+4,Shot Chart Detail,0052100201,171,1626153,Delon Wright,1610612737,Atlanta Hawks,2,10,21,Missed Shot,Jump Shot,3PT Field Goal,Above the Break 3,Right Side Center(RC),24+ ft.,26,-164,206,1,0,20220415,CLE,ATL
+5,Shot Chart Detail,0052100201,186,1626153,Delon Wright,1610612737,Atlanta Hawks,2,8,39,Missed Shot,Jump Shot,3PT Field Goal,Above the Break 3,Right Side Center(RC),24+ ft.,25,-229,105,1,0,20220415,CLE,ATL
+6,Shot Chart Detail,0052100201,209,1626153,Delon Wright,1610612737,Atlanta Hawks,2,7,40,Made Shot,Driving Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,0,-1,6,1,1,20220415,CLE,ATL

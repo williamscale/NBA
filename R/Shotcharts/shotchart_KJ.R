@@ -21,20 +21,22 @@ source('../Functions/drawNBAcourt.R')
 # DATA PREPARATION --------------------------------------------------------
 
 # Read in data.
-shots <- read.csv('Keldon-Johnson.2021-22.csv',
+shots <- read.csv('./2021-22/Keldon-Johnson.2021-22.csv',
                   header = TRUE)
 
 # Transform shot locations.
-shots.t <- shotchart.transformer(data = shots,
-                                 col.x = 'LOC_X',
-                                 col.y = 'LOC_Y')
+shots.t.heaves <- shotchart.transformer(data = shots,
+                                        col.x = 'LOC_X',
+                                        col.y = 'LOC_Y')
+
+shots.t <- shots.t.heaves[shots.t.heaves$LOC_Y <= 0, ]
 
 fg.m <- shots.t %>%
   filter(SHOT_MADE_FLAG == 1)
 
 fg.a <- shots.t %>%
   filter(SHOT_MADE_FLAG == 0)
-
+# + stat_density_2d(geom = 'raster', n = 20, aes(fill = after_stat(density)), contour = FALSE) + scale_fill_viridis_c()
 
 fg.plotter <- ggplot(data = fg.m,
                    aes(x = LOC_X,
@@ -50,10 +52,10 @@ court.plotter(fg.plot = fg.plotter,
               point.size = 1.5) +
   ggtitle('Keldon Johnson 2021-22, FG') +
   theme_solarized_2() +
-  annotate(geom = 'text',
-           x = 15,
-           y = -2,
-           color = '#00B2A9') +
+  # annotate(geom = 'text',
+  #          x = 15,
+  #          y = -2,
+  #          color = '#00B2A9') +
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         axis.text.x = element_blank(),

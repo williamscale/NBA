@@ -1,0 +1,5 @@
+,GRID_TYPE,GAME_ID,GAME_EVENT_ID,PLAYER_ID,PLAYER_NAME,TEAM_ID,TEAM_NAME,PERIOD,MINUTES_REMAINING,SECONDS_REMAINING,EVENT_TYPE,ACTION_TYPE,SHOT_TYPE,SHOT_ZONE_BASIC,SHOT_ZONE_AREA,SHOT_ZONE_RANGE,SHOT_DISTANCE,LOC_X,LOC_Y,SHOT_ATTEMPTED_FLAG,SHOT_MADE_FLAG,GAME_DATE,HTM,VTM
+0,Shot Chart Detail,0052100101,154,1626224,Cedi Osman,1610612739,Cleveland Cavaliers,1,0,9,Missed Shot,Jump Shot,3PT Field Goal,Above the Break 3,Center(C),24+ ft.,26,1,261,1,0,20220412,BKN,CLE
+1,Shot Chart Detail,0052100101,193,1626224,Cedi Osman,1610612739,Cleveland Cavaliers,2,9,13,Missed Shot,Driving Floating Jump Shot,2PT Field Goal,Mid-Range,Right Side(R),8-16 ft.,14,-138,29,1,0,20220412,BKN,CLE
+2,Shot Chart Detail,0052100101,203,1626224,Cedi Osman,1610612739,Cleveland Cavaliers,2,8,45,Missed Shot,Driving Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,1,17,8,1,0,20220412,BKN,CLE
+3,Shot Chart Detail,0052100101,224,1626224,Cedi Osman,1610612739,Cleveland Cavaliers,2,7,21,Missed Shot,Jump Shot,3PT Field Goal,Above the Break 3,Center(C),24+ ft.,25,-23,255,1,0,20220412,BKN,CLE

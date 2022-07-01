@@ -1,0 +1,7 @@
+,GRID_TYPE,GAME_ID,GAME_EVENT_ID,PLAYER_ID,PLAYER_NAME,TEAM_ID,TEAM_NAME,PERIOD,MINUTES_REMAINING,SECONDS_REMAINING,EVENT_TYPE,ACTION_TYPE,SHOT_TYPE,SHOT_ZONE_BASIC,SHOT_ZONE_AREA,SHOT_ZONE_RANGE,SHOT_DISTANCE,LOC_X,LOC_Y,SHOT_ATTEMPTED_FLAG,SHOT_MADE_FLAG,GAME_DATE,HTM,VTM
+0,Shot Chart Detail,0052100111,557,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,4,9,42,Made Shot,Cutting Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,0,-7,-2,1,1,20220413,ATL,CHA
+1,Shot Chart Detail,0052100111,567,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,4,9,14,Missed Shot,Pullup Jump shot,2PT Field Goal,Mid-Range,Right Side(R),8-16 ft.,14,-140,20,1,0,20220413,ATL,CHA
+2,Shot Chart Detail,0052100111,647,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,4,3,33,Made Shot,Pullup Jump shot,3PT Field Goal,Right Corner 3,Right Side(R),24+ ft.,22,-229,16,1,1,20220413,ATL,CHA
+3,Shot Chart Detail,0052100111,659,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,4,3,4,Missed Shot,Driving Floating Jump Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,2,4,29,1,0,20220413,ATL,CHA
+4,Shot Chart Detail,0052100111,668,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,4,2,6,Made Shot,Jump Shot,3PT Field Goal,Left Corner 3,Left Side(L),24+ ft.,22,223,24,1,1,20220413,ATL,CHA
+5,Shot Chart Detail,0052100201,163,1627789,Timothe Luwawu-Cabarrot,1610612737,Atlanta Hawks,2,10,44,Missed Shot,Driving Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,3,29,-15,1,0,20220415,CLE,ATL

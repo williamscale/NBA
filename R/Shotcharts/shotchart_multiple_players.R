@@ -66,14 +66,15 @@ title.template <- 'Spurs Starters 2021-22'
 
 fg.all.shotchart <- ggplot(data = fg.m,
                            aes(x = LOC_X,
-                               y = LOC_Y)) +
+                               y = LOC_Y,
+                               color = PLAYER_NAME)) +
   geom_point(data = fg.a,
-             color = '#EF426F',
+             # color = '#EF426F',
              shape = 4,
              size = 1.5)
 
 court.plotter(fg.plot = fg.all.shotchart,
-              point.color = '#00B2A9',
+              # point.color = '#00B2A9',
               point.size = 1.5) +
   ggtitle('Keldon Johnson 2021-22, FG') +
   theme_solarized_2() +
