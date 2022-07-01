@@ -1,5 +1,5 @@
 # Author: Cale Williams
-# Last Updated: 01/26/2022
+# Last Updated: 06/21/2022
 # Source: https://CRAN.R-project.org/package=BasketballAnalyzeR
 
 # ADMINISTRATIVE WORK -----------------------------------------------------
@@ -45,8 +45,7 @@ court.plotter <- function(fg.plot, full = FALSE, line.color = 'black',
 }
 
 court.plotter.lines <- function(fg.plot, full = FALSE, line.color = 'black',
-                                line.size = 1.5, point.color = 'red',
-                                point.size = 1) {
+                                line.size = 1.5) {
   
   shotchart <- drawNBAcourt(fg.plot, full = full, col = line.color,
                             size = line.size) +
