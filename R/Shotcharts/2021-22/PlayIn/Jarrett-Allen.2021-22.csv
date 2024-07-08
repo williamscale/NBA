@@ -1,5 +1,0 @@
-,GRID_TYPE,GAME_ID,GAME_EVENT_ID,PLAYER_ID,PLAYER_NAME,TEAM_ID,TEAM_NAME,PERIOD,MINUTES_REMAINING,SECONDS_REMAINING,EVENT_TYPE,ACTION_TYPE,SHOT_TYPE,SHOT_ZONE_BASIC,SHOT_ZONE_AREA,SHOT_ZONE_RANGE,SHOT_DISTANCE,LOC_X,LOC_Y,SHOT_ATTEMPTED_FLAG,SHOT_MADE_FLAG,GAME_DATE,HTM,VTM
-0,Shot Chart Detail,0052100201,128,1628386,Jarrett Allen,1610612739,Cleveland Cavaliers,1,1,35,Made Shot,Tip Layup Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,0,0,0,1,1,20220415,CLE,ATL
-1,Shot Chart Detail,0052100201,143,1628386,Jarrett Allen,1610612739,Cleveland Cavaliers,1,0,27,Made Shot,Cutting Dunk Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,2,-7,20,1,1,20220415,CLE,ATL
-2,Shot Chart Detail,0052100201,258,1628386,Jarrett Allen,1610612739,Cleveland Cavaliers,2,3,50,Made Shot,Cutting Dunk Shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,2,-10,23,1,1,20220415,CLE,ATL
-3,Shot Chart Detail,0052100201,373,1628386,Jarrett Allen,1610612739,Cleveland Cavaliers,3,8,17,Made Shot,Alley Oop Layup shot,2PT Field Goal,Restricted Area,Center(C),Less Than 8 ft.,0,5,-2,1,1,20220415,CLE,ATL
