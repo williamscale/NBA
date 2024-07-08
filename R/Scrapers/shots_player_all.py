@@ -24,4 +24,4 @@ names = [[name] for name in names]
 
 for i in range(0, len(names)):
 	print(names[i])
-	shots_player.player_shotchart(names[i], '2021-22', 'FGA', 'PlayIn', 0)
+	shots_player.player_shotchart(names[i], '2022-23', 'FGA', 'Regular Season', 0)

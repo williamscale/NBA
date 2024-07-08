@@ -25,7 +25,7 @@ from CommonAllPlayers_Func import create_players_list
 # Got too slow with multiple seasons so input one season at a time.
 # season_players = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
 # Select season to scrape.
-season_players = ['2022']
+season_players = ['2015']
 
 # Choose FGA3 minimum.
 FG3A_filter = 100
@@ -117,6 +117,6 @@ corner3_df.sort_values(by = ['%3PA CORNER'],
 print(corner3_df.head(20), '\n\n', corner3_df.tail(20))
 
 # Pickle dataframe.
-corner3_df.to_pickle('C:/Users/caler/Documents/MyProjects/NBA/R/Projects/Corner3/corner3_leaders_2022.pkl')
+corner3_df.to_pickle('C:/Users/caler/Documents/MyProjects/NBA/R/Projects/Corner3/corner3_leaders_x.pkl')
 
 print('\n--- %s seconds ---\n' % (time.time() - start_time))

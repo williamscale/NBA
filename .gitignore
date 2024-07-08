@@ -4,3 +4,8 @@
 *.JPG
 *.webm
 *.Rhistory
+*.png
+.Rproj.user
+/R/Projects/ShotDiet_D/Archive/
+/R/Projects/ShotDiet_D/viz/
+/R/Projects/ShotDiet_D/Data/

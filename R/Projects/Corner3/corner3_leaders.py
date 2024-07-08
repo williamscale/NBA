@@ -47,6 +47,8 @@ for i in files:
 # Remove 2021 because season is not complete.
 corner3_df = corner3_df[corner3_df['YEAR'] != '2020-21']
 
+print(corner3_df.size)
+
 # Create list of unique player names.
 player_list = corner3_df['PLAYER'].unique().tolist()
 

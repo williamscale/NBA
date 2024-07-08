@@ -147,21 +147,22 @@ player_url_bballref <- function(player = 'ALL', last.init = NA) {
     
 }
     
-  # if (player == 'ALL') {
-  #   
-  #   return(players)
-  #   
-  # } else {
-  #     
-  #   players <- players %>%
-  #     filter(player_name == player)
-  #   
-  #   return(players)
-  #     
-  #   }
-  
+# if (player == 'ALL') {
+#   
+#   return(players)
+#   
+# } else {
+#   
+#   players <- players %>%
+#     filter(player_name == player)
+#   
+#   return(players)
+#   
+# }
+
 
 
 # TESTING -----------------------------------------------------------------
 
 # x <- player_url_bballref(player = 'Jakob Poeltl', last.init = 'p')
+# x <- player_url_bballref(player = 'ALL')

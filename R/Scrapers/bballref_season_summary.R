@@ -14,7 +14,6 @@ summarize.season <- function(season) {
                       season,
                       '.html',
                       sep = '')
-
   
   page.data <- season.url %>%
     read_html() %>%
@@ -59,8 +58,8 @@ summarize.season <- function(season) {
   
   season.summary <- merge(season.summary, totals.opp, by = 'Team')
   
-  season.summary <- season.summary %>%
-    select(-c(GB, Rk, Rk.OPP))
+  # season.summary <- season.summary %>%
+  #   select(-c(GB, Rk, Rk.OPP))
     
   return(season.summary)
   
@@ -68,5 +67,5 @@ summarize.season <- function(season) {
 
 # TESTING -----------------------------------------------------------------
 
-# x <- summarize.season(season = '2020')
+# x <- summarize.season(season = '2022')
 

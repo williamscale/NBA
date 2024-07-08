@@ -19,10 +19,10 @@ from nba_api.stats.endpoints import commonplayerinfo as cpi, shotchartdetail
 # local imports
 # import NBA_court_zones
 # import ShotChartZones_Func
-file_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(file_dir, '..', 'Players'))
+# file_dir = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(os.path.join(file_dir, '..', 'Players'))
 from CommonAllPlayers_Func import get_playerid
-sys.path.append(os.path.join(file_dir, '..', 'PlottingSupport'))
+# sys.path.append(os.path.join(file_dir, '..', 'PlottingSupport'))
 # import add_twitterhandle as tweet
 
 def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular Season', period = 0):
@@ -35,6 +35,7 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 
 	# get player ID from name input
 	playerid = get_playerid(player)
+	# playerid = 1630525
 
 	# retrieve data
 	response = shotchartdetail.ShotChartDetail(
@@ -52,8 +53,11 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 	headers = results['headers']
 	rows = results['rowSet']
 	fg_attempt = pd.DataFrame(rows)
+	if fg_attempt.empty:
+		print('No FGA.')
+		return None
 	fg_attempt.columns = headers
-
+	
 	# mirror x, NBA's data is reversed
 	fg_attempt['LOC_X'] = -1 * fg_attempt['LOC_X']
 
@@ -70,10 +74,10 @@ def player_shotchart(player, season = 0, fg_type = 'FGA', season_type = 'Regular
 
 if __name__ == '__main__':
 
-	player = ['Derrick White']
+	player = ['Luca Vildoza']
 	season = '2021-22'
 	fg_type = 'FGA'
-	season_type = 'Regular Season'
+	season_type = 'Playoffs'
 	period = 0
 
 	fg_make = player_shotchart(player, season, fg_type, season_type, period)
